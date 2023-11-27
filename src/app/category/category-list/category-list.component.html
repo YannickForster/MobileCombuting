@@ -1,1 +1,55 @@
-Category List
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Categories</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="swap-vertical"></ion-icon>
+            <ion-select aria-label="sort" interface="popover" value="sort-AZ">
+              <ion-select-option value="sort-newest">Created at (newest first)</ion-select-option>
+              <ion-select-option value="sort-oldest">Created at (oldest first)</ion-select-option>
+              <ion-select-option value="sort-AZ">Name (A-Z)</ion-select-option>
+              <ion-select-option value="sort-ZA">Name (Z-A)</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="search"></ion-icon>
+            <ion-input placeholder="Search"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-label>Auswärts Essen</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Lebensmittel</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Unterhaltung</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Versicherung</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>ÖV</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
