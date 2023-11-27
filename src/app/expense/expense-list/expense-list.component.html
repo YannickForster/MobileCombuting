@@ -3,3 +3,21 @@
     <ion-title>Header</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="swap-vertical-outline"></ion-icon>
+          <ion-select aria-label="sort" interface="popover" value="sort-AZ">
+            <ion-select-option value="sort-newest">Created at (newest first)</ion-select-option>
+            <ion-select-option value="sort-oldest">Created at (oldest first)</ion-select-option>
+            <ion-select-option value="sort-AZ">Name (A-Z)</ion-select-option>
+            <ion-select-option value="sort-za">Name (Z-A</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col>2</ion-col>
+  </ion-row>
+</ion-grid>
