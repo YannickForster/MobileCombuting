@@ -6,4 +6,5 @@ export const environment = {
     projectId: 'budget-planner-7eddb',
     appId: '1:278151755192:web:227ae9460314c348be4b4d',
   },
+  backendUrl: 'https://budget-service.onrender.com',
 };
