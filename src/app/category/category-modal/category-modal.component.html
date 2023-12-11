@@ -1,34 +1,38 @@
-<ion-grid>
-  <ion-row>
-    <ion-col class="ion-text-start">
-      <!-- Align the content to the start (left) in this column -->
-      <ion-list>
-        <ion-item>
-          <ion-button style="--background: transparent">
-            <ion-icon name="close-outline"></ion-icon>
-            Logout
-          </ion-button>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-    <ion-col class="ion-text-center">
-      <ion-list>
-        <ion-item>
-          <ion-header>Add category</ion-header>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-    <ion-col class="ion-text-end">
-      <ion-list>
-        <ion-item>
-          <ion-button style="--background: transparent">
-            <ion-icon name="save-outline"></ion-icon>
-            Save
-          </ion-button>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<!-- ------ -->
+<!-- Header -->
+<!-- ------ -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">
+        <ion-icon slot="start" name="close"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-buttons>
 
-<ion-content></ion-content>
+    <ion-title>Add category</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">
+        <ion-icon slot="start" name="save"></ion-icon>
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ------- -->
+<!-- Content -->
+<!-- ------- -->
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-icon name="text" slot="start"></ion-icon>
+    <ion-input maxlength="40" placeholder="Enter the category's name" required></ion-input>
+  </ion-item>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="delete()" color="danger">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
