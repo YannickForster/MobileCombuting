@@ -16,6 +16,8 @@ export class ExpenseListComponent {
   addMonths = (number: number): void => {
     this.date = addMonths(this.date, number);
   };
+  searchForm: any;
+  loading: any;
 
   async openModal(expense?: Expense): Promise<void> {
     const modal = await this.modalCtrl.create({
