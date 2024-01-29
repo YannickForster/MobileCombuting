@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AllCategoryCriteria, Category, CategoryCriteria, Page } from '../shared/domain';
 import { environment } from '../../environments/environment';
-import { Expense, ExpenseCriteria, ExpenseUpsertDto, PagingCriteria } from '../../shared/domain';
+import { Expense, ExpenseCriteria, ExpenseUpsertDto, PagingCriteria } from '../shared/domain';
 
 @Injectable({ providedIn: 'root' })
 export class ExpenseService {
