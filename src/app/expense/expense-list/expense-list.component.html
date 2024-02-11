@@ -21,11 +21,10 @@
       <ion-col>
         <ion-item>
           <ion-icon name="swap-vertical" slot="start"></ion-icon>
-          <ion-select placeholder="Name (A-Z)" interface="popover">
-            <ion-select-option> Name (A-Z) </ion-select-option>
-            <ion-select-option> Name (Z-A) </ion-select-option>
-            <ion-select-option> Created at (oldest first) </ion-select-option>
-            <ion-select-option> Created at (newest first) </ion-select-option>
+          <ion-select interface="popover" formControlName="sort">
+            <ion-select-option *ngFor="let sortOption of sortOptions" [value]="sortOption.value">
+              {{ sortOption.label }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -44,7 +43,7 @@
       <ion-col>
         <ion-item>
           <ion-icon name="search" slot="start"></ion-icon>
-          <ion-input placeholder="Search"></ion-input>
+          <ion-input placeholder="Search" formControlName="name"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

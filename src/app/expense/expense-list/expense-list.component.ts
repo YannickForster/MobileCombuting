@@ -23,12 +23,10 @@ export class ExpenseListComponent {
   date = set(new Date(), { date: 1 });
   expenseGroups: ExpenseGroup[] | null = null;
   lastPageReached = false;
-  loading = false;
   searchCriteria: ExpenseCriteria = { page: 0, size: 25, sort: this.initialSort };
+  loading = false;
   // Category array
   categories: Category[] = [];
-  readonly searchForm: FormGroup;
-  //remove and also import
   readonly sortOptions: SortOption[] = [
     { label: 'Created at (newest first)', value: 'createdAt,desc' },
     { label: 'Created at (oldest first)', value: 'createdAt,asc' },
@@ -37,6 +35,8 @@ export class ExpenseListComponent {
     { label: 'Name (A-Z)', value: 'name,asc' },
     { label: 'Name (Z-A)', value: 'name,desc' },
   ];
+  readonly searchForm: FormGroup;
+
   private readonly unsubscribe = new Subject<void>();
   constructor(
     private readonly modalCtrl: ModalController,
