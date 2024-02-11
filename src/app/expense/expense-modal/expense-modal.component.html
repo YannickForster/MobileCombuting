@@ -12,7 +12,7 @@
     </ion-buttons>
     <ion-title>Add Expense</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="save()" [disabled]="ExpenseForm.pristine || ExpenseForm.invalid || submitting">
+      <ion-button (click)="save()" [disabled]="expenseForm.pristine || expenseForm.invalid || submitting">
         <ion-icon slot="start" name="save"></ion-icon>
         Save
       </ion-button>
@@ -22,7 +22,7 @@
 <!-- ------- -->
 <!-- Content -->
 <!-- ------- -->
-<ion-content class="ion-padding" [formGroup]="ExpenseForm">
+<ion-content class="ion-padding" [formGroup]="expenseForm">
   <!-- Name -->
   <ion-item>
     <ion-icon name="text" slot="start"></ion-icon>
@@ -39,12 +39,15 @@
   <ion-item>
     <ion-icon name="pricetag" slot="start"></ion-icon>
     <ion-select
-      formControlName="categoryID"
+      formControlName="categoryId"
       interface="popover"
       placeholder="choose a category"
       [disabled]="submitting"
     >
-      <ion-select-option *ngFor="let category of categories">{{ category.name }}</ion-select-option>
+      <ion-select-option value=""></ion-select-option>
+      <ion-select-option *ngFor="let category of categories" [value]="category.id">{{
+        category.name
+      }}</ion-select-option>
     </ion-select>
     <ion-button slot="end" (click)="showCategoryModal()">
       <ion-icon slot="icon-only" name="add"> </ion-icon>
@@ -69,14 +72,7 @@
     <ion-datetime-button datetime="datetime"> </ion-datetime-button>
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime
-          formControlName="date"
-          presentation="date"
-          id="datetime"
-          [disabled]="submitting"
-          value=""
-        ></ion-datetime>
+        <ion-datetime formControlName="date" presentation="date" id="datetime" [disabled]="submitting"></ion-datetime>
       </ng-template>
-    </ion-modal>
-  </ion-item>
-</ion-content>
+    </ion-modal> </ion-item
+></ion-content>

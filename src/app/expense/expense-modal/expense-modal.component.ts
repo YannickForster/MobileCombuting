@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { filter, from } from 'rxjs';
+import { filter, finalize, from } from 'rxjs';
 import { CategoryModalComponent } from '../../category/category-modal/category-modal.component';
 import { ActionSheetService } from '../../shared/service/action-sheet.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,15 +8,22 @@ import { ExpenseService } from '../expense.service';
 import { ToastService } from '../../shared/service/toast.service';
 import { Category, Expense } from '../../shared/domain';
 import { CategoryService } from '../../category/category.service';
+import { formatISO, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-expense-modal',
   templateUrl: './expense-modal.component.html',
 })
-export class ExpenseModalComponent {
-  readonly ExpenseForm: FormGroup;
+export class ExpenseModalComponent implements OnInit {
+  ngOnInit() {
+    const { id, amount, category, date, name } = this.expense;
+    if (category) this.categories.push(category);
+    if (id) this.expenseForm.patchValue({ id, amount, categoryId: category?.id, date, name });
+  }
+  readonly expenseForm: FormGroup;
   submitting = false;
   categories: Category[] = [];
+  expense: Expense = {} as Expense;
   constructor(
     private readonly actionSheetService: ActionSheetService,
     private readonly expenseService: ExpenseService,
@@ -25,10 +32,10 @@ export class ExpenseModalComponent {
     private readonly categoryService: CategoryService,
     private readonly toastService: ToastService,
   ) {
-    this.ExpenseForm = this.formBuilder.group({
+    this.expenseForm = this.formBuilder.group({
       id: [], // hidden
       name: ['', [Validators.required, Validators.maxLength(40)]],
-      categoryID: [],
+      categoryId: [],
       date: [new Date().toISOString()],
       amount: [],
     });
@@ -40,13 +47,21 @@ export class ExpenseModalComponent {
 
   save(): void {
     this.submitting = true;
-    this.expenseService.upsertExpense(this.ExpenseForm.value).subscribe({
-      next: () => {
-        this.toastService.displaySuccessToast('Category saved');
-        this.modalCtrl.dismiss(null, 'save');
-      },
-      error: (error) => this.toastService.displayErrorToast('Could not save expense', error),
-    });
+    const expenseData = {
+      ...this.expenseForm.value,
+      date: formatISO(parseISO(this.expenseForm.value.date), { representation: 'date' }),
+    };
+
+    this.expenseService
+      .upsertExpense(expenseData)
+      .pipe(finalize(() => (this.submitting = false)))
+      .subscribe({
+        next: () => {
+          this.toastService.displaySuccessToast('Category saved');
+          this.modalCtrl.dismiss(null, 'refresh');
+        },
+        error: (error) => this.toastService.displayErrorToast('Could not save expense', error),
+      });
   }
 
   delete(): void {
